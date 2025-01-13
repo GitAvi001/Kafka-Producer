@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper #docker zookeeper container
+    container_name: zookeeper
+    ports: 
+      - "2181:2181" #docker zookeeper container will receive the traffic from port 2181 from the outside 2181 port
+  kafka:
+    image: wurstmeister/kafka
+    container_name: kafka
+    ports:
+      - "9092:9092" #docker kafka container
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: localhost #If running the containers locally, this can be changed as using an different ip address also
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181    
